@@ -1,0 +1,52 @@
+//On applique ici un style aux "composantes majeures" du site (header, footer, main...) 
+//Il faut aussi réfléchir aux styles communs de ces composantes et leur ajouter un classe commune si nécessaire (.inner, .wrapper...)
+
+.hero {
+    height: 360px;
+    position: relative;
+    background: $cb;
+    
+    @include mq(medium){
+        background: none;
+    }
+    @include mq(large){
+        height: 100vh;
+    }
+}
+.background {
+    @include mq(medium){
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: $cb;
+        background: url(../images/headerBG-medium.jpg);
+        background-size: cover;
+        background-position: 20%;
+        filter: saturate(30%);
+        z-index: -1;
+    }
+    @include mq(large){
+        background: url(../images/headerBG-large.jpg);
+    }
+}
+.darkenFilter {
+    filter: brightness(50%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+body{
+    background: $cb;
+    overflow-x: hidden;//
+}
+.serie-vedette {
+    height: calc(100vw / 16 * 9);
+    
+    @include mq(medium){
+        height: calc(#{$medium} / 16 * 9);
+    }
+    @include mq(large){
+        height: calc(#{$large} / 16 * 9);
+    }
+}

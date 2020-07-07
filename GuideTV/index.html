@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--
+-mise en forme text hero
+-text profil pas cool
+-couleur titre
+-animation avec waypoints
+-4**** images pareils
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guide Héro</title>
+    <link href="https://fonts.googleapis.com/css?family=Anton|Catamaran" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="vendors/slick/slick.css">
+    <!--[if lt IE 9]>
+        <script src="js/polyfills/respond.min.js"></script>
+        <script src="js/polyfills/calc.min.js"></script>
+        <script src="js/polyfills/selectivizr.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="nav-mask is-masked">
+        <nav class="menu">
+            <ul class="menu-list">
+                <li class="active accueil"><a href="#">Accueil</a></li>
+                <li class="vedette"><a href="#vedette">Séries en vedette</a></li>
+                <li class="social facebook"><a href="https://www.facebook.com"><img src="images/fb-logo.svg" alt="facebook logo"></a></li>
+                <li class="social twitter"><a href="https://www.twitter.com"><img src="images/twitter-logo.svg" alt="twitetr logo"></a></li>
+            </ul>
+        </nav>
+    </div>
+    <header class="hero">
+        <div class="darkenFilter"><div class="background"></div></div>
+        <img src="images/guideTV.svg" alt="Logo Guide TV" class="logo">
+        <h1>Guide TV</h1>
+        <h2>Votre dépendance finalement encouragée</h2>
+        <button class="burger-nav"></button>
+    </header>
+    <main>
+        <div class="profile is-top">
+            <img src="images/pdp.jpg" alt="Photo de profil" class="pdp1">
+            <div class="profil-nom name1">Jean-Sebastien Légaré</div>
+            <div class="banner">
+                <img src="images/pdp.jpg" alt="Photo de profil" class="pdp2">
+                <div class="profil-nom name2">Jean-Sebastien Légaré</div>
+                <div class="profil-abonnes">86</div>
+                <div class="exit"><a href="#disconnect"><img src="images/exit.svg" alt="bouton deconnection"></a></div>
+            </div>
+        </div>
+        <div class="serie-vedette" id="vedette">
+            <div>
+                <img src="_sev/fargo-small.jpg" srcset="_sev/fargo-medium.jpg 750w, _sev/fargo-large.jpg 1200w, _sev/fargo-xlarge.jpg 2500w"  alt="fargo">
+                <h5>Fargo</h5>
+                <p>Les Gerhardt reçoivent une proposition inattendue, et deux meurtriers surprenants essaient de nettoyer les dégâts qu'ils ont faits.</p>
+                <div class="slick-date">14 janvier 2017</div>
+            </div>
+            <div>
+                <img src="_sev/homeland-small.jpg" srcset="_sev/homeland-medium.jpg 750w, _sev/homeland-large.jpg 1200w, _sev/homeland-xlarge.jpg 2500w" alt="homeland">
+                <h5>Homeland</h5>
+                <p>Saul ne fait plus partie de la CIA et Carrie se voit confier un poste à l’étranger, ce qui l'amènera à circuler dans des régions sensibles du globe.</p>
+                <div class="slick-date">5 janvier 2017</div>
+            </div>
+            <div>
+                <img src="_sev/the-americans.jpg" srcset="_sev/the-americans-medium.jpg 750w, _sev/the-americans-large.jpg 1200w, _sev/the-americans-xlarge.jpg 2500w" alt="the americans">
+                <h5>The Americans</h5>
+                <p>Le couple Jennings se dispute encore sur l'avenir de leur fille : la laisser vivre sa vie ou accepter que le KGB ne la forme à son tour à être un agent infiltré. Elizabeth perd une liste de noms, trahie par son contact, et Philip tente de rattraper le coup. Stan essaie de sauver son mariage.</p>
+                <div class="slick-date">9 janvier 2017</div>
+            </div>
+        </div>
+        <div class="search">
+            <input type="text" class="text" placeholder="Rechercher">
+            <input type="submit" value="" class="submit">
+        </div>
+        <ul class="abonnement">
+            <li class="serie is-favori waypoint-anim">
+                <div class="affiche-size">
+                    <img src="#" alt="affiche de film" class="serie-affiche">
+                </div>
+                <h4 class="serie-titre">Game Of Thrones</h4>
+                <div class="serie-vu">11</div>
+                <div class="serie-dispo">100</div>
+                <button class="serie-abo">Se désabonner</button>
+            </li>
+        </ul>
+    </main>
+    <footer>
+        <p>2016 - Techniques d'intégration multimédia. Réalisé à des fins pédagogiques dans le cadre du cours d'Intégration Web II</p>
+    </footer>
+    <!--jquery-->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+    <script src="vendors/jquery.smooth-scroll.js"></script>
+    <script src="vendors/slick/slick.js"></script>
+    <script src="vendors/Contenu.min.js"></script>
+    <script src="vendors/jquery.waypoints.min.js"></script>
+    <script>
+        $(function(e){
+            //carrousselle
+            $(function(e){
+                $(".serie-vedette").slick({
+                    autoplay: true,
+                    autoplaySpeed: 5000,
+                    infinite: true,
+                    prevArrow: '<button type="button" class="slick-prev"><img src="images/left-arrow.svg" alt="left arrow"></button>',
+                    nextArrow: '<button type="button" class="slick-next"><img src="images/left-arrow.svg" alt="left arrow"></button>',
+                    swipe: false,
+                    dots: true,
+                    responsive: [{
+                        breakpoint:1200,
+                            settings:{
+                                swipe: true,
+                                dots: false
+                            }
+                    },{
+                        breakpoint:750,
+                            settings:{
+                                arrows: false,
+                                dots: false,
+                                swipe: true,
+                            }
+                    }]
+                });
+            });
+            
+            //Waypoints
+            $(".serie-vedette").waypoint(function(e){
+                
+                if(e == "down"){
+                    $(".vedette").addClass("active");
+                    $(".accueil").removeClass("active");
+                } else {
+                    $(".accueil").addClass("active");
+                    $(".vedette").removeClass("active");
+                }
+            }, {offset: '90px'});
+            $("main").waypoint(function(e){
+                
+                if(e == "down"){
+                    $(".serie").removeClass("waypoint-anim");
+                } else {
+                    $(".serie").addClass("waypoint-anim");
+                }
+            }, {offset: '150px'});
+            
+            //SmoothScroll
+            $('a').smoothScroll();
+            
+            //toggle Favori
+            $(".serie-titre").dblclick(function(e) {
+                var fav = $(this).parent();
+                $(fav).toggleClass('is-favori');
+                console.log("favori toggled On/Off");
+            });
+
+            // toggle nav mobile
+            $(".burger-nav").click(function(e) {
+                $('.nav-mask').toggleClass('is-masked');
+                console.log(".is-masked toggled On/Off");
+            });
+
+            // toggle off nav mobile on select
+            $(".menu-list li").click(function(e) {
+                $('.nav-mask').addClass('is-masked');
+                console.log(".is-masked toggled Off");
+            });
+            //toggle top
+            $(document).scroll(function(e) {
+                var scrollY = $(document).scrollTop();
+
+                if(scrollY == 0) {
+                    $(".profile").addClass("is-top");
+                } else {
+                    $(".profile").removeClass("is-top");
+                }
+            })
+            //toggle scroll
+            $(document).scroll(function(e) {
+                var bannerPos = $(".banner").offset().top - 70;
+                var screenPos = $(document).scrollTop();
+
+                if(screenPos >= bannerPos) {
+                    $(".profile").addClass("is-scrolled");
+                } else {
+                    $(".profile").removeClass("is-scrolled");
+                }
+            })
+            //toggle sticky
+            
+            /* When Resized */
+            $(window).resize(function(e) {
+                var navPos = $("main").offset().top + 80;
+                var screenPos = $(document).scrollTop();
+                var screenWidth = $(document).width();
+
+                if(screenWidth < 720) {
+                    navPos = $("main").offset().top + 80;
+                }
+
+                if(screenPos >= navPos) {
+                    $(".nav-mask").addClass("is-sticky");
+                    $(".banner").addClass("is-sticky");
+                } else {
+                    $(".nav-mask").removeClass("is-sticky");
+                    $(".banner").removeClass("is-sticky");
+                }
+            })
+            /* When Scrolled */
+            $(document).scroll(function(e) {
+                var navPos = $("main").offset().top + 80;
+                var screenPos = $(document).scrollTop();
+                var screenWidth = $(document).width();
+
+                //when on small device rework navPos
+                if(screenWidth < 720) {
+                    navPos = $("main").offset().top + 123;
+                }
+
+                if(screenPos >= navPos) {
+                    $(".nav-mask").addClass("is-sticky");
+                    $(".banner").addClass("is-sticky");
+                } else {
+                    $(".nav-mask").removeClass("is-sticky");
+                    $(".banner").removeClass("is-sticky");
+                }
+            })
+        });
+        
+    </script>
+</body>
+</html>

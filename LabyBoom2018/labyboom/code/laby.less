@@ -1,0 +1,299 @@
+//import fonts Jessy Pouliot 1533944
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC|Fjalla+One');
+
+*{
+	font-family: 'Fjalla One', sans-serif;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #0f0b07;
+	background-image: url(../images/gazon_256.jpg);
+	background-size: 128px;
+    overflow:hidden;
+    font-family: 'Oswald', sans-serif;
+    line-height: 2em;
+}
+div.skin {
+	position: relative;
+	margin: 0em;
+}
+#divLabyrinthe {
+	font-size: 64px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.animFadeIn {
+    animation: fadeInDebut 0.5s;
+}
+@keyframes fadeInDebut {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+#divLabyrinthe div.cadre {
+    width: 1em;
+		height: 1em;
+    background-repeat: repeat;
+
+    &#cadre_centre {
+        width: auto;
+        height: auto;
+    }
+    &#cadre_e {
+        height: auto;
+    }
+}
+div.grille {
+	font-size: 32px;
+	display: flex;
+	flex-wrap: wrap;
+	background-image: url(../images/plancherbriques_128.png);
+	& > div {
+		width: 1em;
+		height: 1em;
+		background-size: 400%;
+		background-image: url(../images/gravier2.png);
+		& > img {
+			display: block;
+		}
+	}
+}
+*.sprite {
+	position: absolute;
+	font-size: 32px;
+	& > * {
+		width: 1em;
+		height: 1em;
+		background-repeat: no-repeat;
+		background-position: 0em 0em;
+	}
+}
+*.perso {
+	transition-timing-function: cubic-bezier(.38,.21,.67,.84); //courbe generee sur cubic-bezier.com
+	z-index: 2000;
+	& > * {
+		background-position: -1em -1em;
+		animation-name: pas;
+		animation-play-state: running;
+		animation-duration: .5s;
+		animation-timing-function: steps(1);
+		animation-iteration-count: 0;
+	}
+}
+*.objet {
+	z-index: 1001;
+	pointer-events: none;
+	& > * {
+		background-position: center center;
+	}
+}
+// #tim Jessy, style barre info
+#divInfos {
+    position: absolute;
+    top: 20px;
+		width: 60%;
+    padding: 20px;
+    background:rgba(0, 0, 0, 0.5);
+    color:white;
+    z-index: 4000;
+		#divNumNiveau{
+			float: left;
+		}
+		#divVie{
+			float: left;
+			margin-left: 50px;
+		}
+		// #tim Jessy Pouliot Anim perdre vie
+		#divVie.grow{
+			img{
+				transform: scale(1.0);
+				animation-name: grow;
+				animation-duration: 1.5s;
+			}
+		}
+		#divCle{
+			float: left;
+			margin-left: 50px;
+		}
+		#divChrono{
+			float: right;
+		}
+		div{
+			height: 30px;
+			font-size: 30px;
+			padding: 0;
+			margin: 0;
+			img{
+				float: left;
+				display: block;
+				height: 100%;
+			}
+		}
+}
+// #tim Jessy Pouliot Anim perdre vie
+@keyframes grow {
+    0%   {
+			transform: scale(1.0);
+			filter: brightness(100);
+		}
+    50%  {
+			transform: scale(1.5);
+			filter: brightness(110);
+		}
+    100% {
+			transform: scale(1.0);
+			filter: brightness(100);
+		}
+}
+#divNumNiveau {
+    font-size:2vw;
+    text-align: left;
+    line-height: 90%;
+}
+#divChrono {
+    font-size:6vw;
+    text-align: right;
+    line-height: 90%;
+    margin-top: 1vw;
+}
+#divMessage {
+    position:fixed;
+    font-size:1.5em;
+    padding: 0.25em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+    bottom:0.5em;
+    background:rgba(0, 0, 0, 0.5);
+    color:white;
+    z-index: 5001;
+    opacity: 0;
+}
+.animPop {
+    animation: popIn 4s linear;
+}
+#divJeu, #imgBoom {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width:100%;
+}
+#divJeu {
+    height:100%;
+    z-index: 8001;
+};
+#divInstruction{// #tim Jessy, style instruction
+	position: absolute;
+	top: 30vw; left: 0; bottom: 0; right: 0;
+	z-index: 8002;
+	margin: auto;
+	text-align: justify;
+	width: 50vw;
+}
+// #tim Jessy,
+#btnCommencer, #btnRecommencer, #btnInstruction {
+    margin: auto;
+    position: absolute;
+    font-size: 2em;
+    width:8em;
+		// #tim Jessy,
+		z-index: 8003;
+		// left: 0;
+		// right: 0;
+		font-family: 'Bowlby One SC', cursive;
+		color: #fff;
+		// top: 0;
+		top: calc(60vh);
+		padding: 10px 0;
+		// bottom: 0;
+		// height:2em;
+		border: none;
+		background: none;
+		text-transform: uppercase;
+		&:hover{
+			color: #ffde00;
+		}
+		&:active{
+			color: #9a8703;
+		}
+}
+#btnCommencer, #btnRecommencer{// #tim Jessy, position bouton
+		right: 30vw;
+		left: 0;
+}
+#btnInstruction{// #tim Jessy, position bouton instruciton
+		right: 0;
+		left: 30vw;
+}
+#divLogo {
+    position: fixed;
+    top: 12vw;
+    // left: 1.5vw;// #tim Jessy,
+		margin: auto;
+    z-index: 7001;
+		transition-duration: 0.3s;// #tim Jessy, transition
+    & > img {
+        width: 30vw;
+        min-width: 200px;
+    }
+		&.hide{// #tim Jessy, cacher logo
+			opacity: 0;
+		}
+}
+#divSources {
+    position: fixed;
+    bottom: 0.7vw;
+    right: 1vw;
+    z-index: 9001;
+    & p, a {
+        font-size: 11px;
+        text-align: right;
+        line-height: 0.95;
+        margin: 0em;
+				// #tim Jessy,
+				// color: rgb(10%,10%,10%);
+				color: #fff;
+    }
+}
+@keyframes popIn {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  20% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes pas {
+    0% {
+        background-position-y: 0em;
+    }
+    50% {
+        background-position-y: -1em;
+    }
+    100% {
+        background-position-y: 0em;
+    }
+}

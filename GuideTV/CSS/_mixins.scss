@@ -1,0 +1,41 @@
+//mq: Génère des media queries selon le type d'écran fourni. 
+//$ecran: Doit correspondre aux noms déclarés sous le tableau $breakpoints (small,medium,large,x-large)
+//min width
+@mixin mq($ecran){
+    $largeur:map-get($breakpoints,$ecran);
+    @media screen and (min-width:$largeur){
+        @content;
+    }
+}
+//animations
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}

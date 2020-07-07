@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Earth - ThreeJS</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.js"></script>
+		<script src="vendor/three.js/Detector.js"></script>
+		<!-- https://github.com/mrdoob/stats.js -->
+		<script src="vendor/three.js/Stats.js"></script>
+		<script src="vendor/noise.js" charset="utf-8"></script>
+		<script src="vendor/threex/THREEx.screenshot.js"></script>
+		<script src="vendor/threex/THREEx.FullScreen.js"></script>
+		<script src="vendor/threex/THREEx.WindowResize.js"></script>
+		<!-- <script src="vendor/threex.dragpancontrols.js"></script> -->
+
+		<link  href="css/main.css" rel="stylesheet"/>
+	</head>
+<body>
+	<div id="info">Scroll to rotate the earth<br>Press [F] for fullscreen</div>
+	<div id="container"></div>
+
+	<script type="text/javascript">
+		var stats;
+		var scene, camera, renderer, meshTerrain, meshWater, meshStars;
+
+		var direction = false;
+		var cols, rows;
+		var scl = 40;
+		var w = 800;
+		var h = 800;
+		var flying = 0;
+		var shooting = 0;
+		var stars;
+		var geometry;
+		var geometryWater;
+		var PI = Math.PI;
+		var speed = 0.01;
+		var terrain = [];
+
+
+		if( !init() )	animate();
+
+		function init(){
+
+			cols = w / scl;
+			rows = w / scl;
+			for (var x = 0; x < cols; x++) {
+				terrain[x] = [];
+				for (var y = 0; y < rows; y++) {
+			    terrain[x][y] = 0; //specify a default value for now
+				}
+			}
+
+			if( Detector.webgl ){
+				renderer = new THREE.WebGLRenderer({
+					antialias		: true,	// to get smoother output
+					//preserveDrawingBuffer	: true	// to allow screenshot
+				});
+				// renderer.setClearColorHex( 0xBBBBBB, 1 );
+			}else{
+				renderer	= new THREE.CanvasRenderer();
+			}
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.getElementById('container').appendChild(renderer.domElement);
+
+			// create a scene
+			scene = new THREE.Scene();
+
+			createCamera();
+	    createShape();
+	    createShapeWater();
+			deformWater();
+	    createSky();
+	    createLight();
+	    createDark();
+			THREEx.WindowResize.bind(renderer, camera);
+			// allow 'p' to make screenshot
+			THREEx.Screenshot.bindKey(renderer);
+			// allow 'f' to go fullscreen where this feature is supported
+			if( THREEx.FullScreen.available() ){
+				THREEx.FullScreen.bindKey();
+			}
+		}
+
+		function createLight(){
+	    var light = new THREE.DirectionalLight( 0xffffff );
+	    light.intensity = 2.5;
+	    light.position.set( -600, 100, 500 ).normalize();
+	    scene.add(light);
+		}
+
+		function createDark(){
+	    var light = new THREE.DirectionalLight( 0xffffff );
+	    light.intensity = -1.5;
+	    light.position.set( 600, -100, 500 ).normalize();
+	    scene.add(light);
+		}
+
+		function createCamera(){
+			camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 2000 );
+			camera.position.set(0, 0, 600);
+			camera.rotation.z = -PI/24;
+			scene.add(camera);
+		}
+
+		function createSky(){
+	    var pointMaterial = new THREE.PointsMaterial();
+	    pointMaterial.color = new THREE.Color("white");
+	    pointMaterial.size = 5;
+	    pointMaterial.sizeAttenuation = true;
+	    stars = new THREE.SphereGeometry(w * 2, cols * 2);
+	    meshStars = new THREE.Points( stars, pointMaterial );
+	    for(var vx = 0; vx < stars.vertices.length; vx++){
+        stars.vertices[vx].x = stars.vertices[vx].x + Math.floor(Math.random() * 1000) - 500;
+        stars.vertices[vx].y = stars.vertices[vx].y + Math.floor(Math.random() * 2500) - 700;
+	    }
+	    scene.add( meshStars );
+		}
+
+		function createShape(){
+	    geometry = new THREE.PlaneGeometry( w, h, cols, rows );
+	    var material = new THREE.MeshPhongMaterial( { color: 0x32a83e, specular: 0x0f0f0f, shininess: 20 } );
+	    meshTerrain = new THREE.Mesh( geometry, material );
+	    meshTerrain.rotation.z = -PI/2;
+	    scene.add( meshTerrain );
+		}
+
+		function createShapeWater(){
+	    geometryWater = new THREE.PlaneGeometry( w, h, cols, rows );
+	    var material = new THREE.MeshPhongMaterial( { color: 0x3573d6, specular: 0x0f0f0f, shininess: 20 } );
+	    meshWater = new THREE.Mesh( geometryWater, material );
+	    meshWater.rotation.z = -PI/2;
+	    scene.add( meshWater );
+		}
+
+		function flyingStars(){
+	    shooting += -0.005;
+	    meshStars.rotation.y = -flying/5 + shooting;
+		}
+
+		function deformShape(){
+		  flying += speed;
+		  var yoff = flying;
+		  for (var y = 0; y < rows; y++) {
+		    var xoff = 0;
+		    for (var x = 0; x < cols; x++) {
+		      var seed = "KevinEstMaintenantUnSeed.. YOUPI";
+		      var noise = new SimplexNoise(seed);
+		      var db = 40;
+		      noise = noise.noise2D(xoff, yoff);
+		      terrain[x][y] =  noise * db;
+		      xoff += 0.1;
+		    }
+		    yoff -= 0.1;
+		  }
+
+		  var angle = Math.tan(PI/cols);
+		  for (y = 0; y < rows; y++) {
+		    for (x = 0; x < cols; x++) {
+		      var zOffX = Math.sin(angle * x)*200;
+		      var zOffY = Math.sin(angle * y)*200;
+		      geometry.verticesNeedUpdate = true;
+		      geometry.vertices[y*(cols+1)+x].z =  terrain[x][y] + zOffX + zOffY;
+		    }
+		  }
+		}
+
+		function deformWater(){
+		  var angle = Math.tan(PI/cols);
+		  for (var y = 0; y <= rows; y++) {
+		    for (var x = 0; x <= cols; x++) {
+		      var zOffX = Math.sin(angle * x)*200;
+		      var zOffY = Math.sin(angle * y)*200;
+		      geometryWater.verticesNeedUpdate = true;
+		      geometryWater.vertices[y*(cols+1)+x].z =  zOffX + zOffY;
+		    }
+		  }
+		}
+
+		// animation loop
+		function animate() {
+			requestAnimationFrame( animate );
+
+			if(direction){
+				if(speed < 0.01){
+					speed += 0.001;
+				}
+			} else {
+				if(speed > -0.01){
+					speed -= 0.001;
+				}
+			}
+			speed /= 1.03;
+			flyingStars();
+			deformShape();
+			renderer.render(scene, camera);
+		}
+
+		window.addEventListener('wheel', function() {
+			var wheel = event.wheelDelta;;
+			if(wheel < 0){
+				direction = false;
+			} else {
+				direction = true;
+			}
+			console.log(wheel);
+			speed = speed + wheel/6000;
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+//On définit ici le style par défaut des balises présentes sur le site, peu importe où elles se trouvent (le style pourrait être écrasé par la suite).
+// N'implique habituellement que des sélecteurs de balise et des sélecteurs d'attribut. Ne pas utiliser de classe ni de !important.
+@import "reset";
+
+*{
+    box-sizing: border-box;
+    font-family: 'Catamaran', 'arial';
+    font-size: 12pt;
+    
+    &::-webkit-scrollbar-track
+    {
+        background: $cb;
+    }
+
+    &::-webkit-scrollbar
+    {
+        width: 8px;
+        background-color: $cdg;
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+        border-radius: 4px;
+        border:1px solid $cdg;
+        background-color: $cg;
+    }
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+button, input[type="submit"] {
+    cursor: pointer;
+}
+
+//body{
+//    @include mq(large){
+//        color:red;
+//    }
+//}

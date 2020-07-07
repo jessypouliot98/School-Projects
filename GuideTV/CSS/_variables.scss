@@ -1,0 +1,46 @@
+//On déclare ici les variables en les séparant en catégories (couleurs, polices, tailles, media queries...)
+
+//MediaQueries
+//Modifier les valeurs en fonction du design du site
+$breakpoints:(
+    'small':320px,
+    'medium':750px,
+    'large':1200px
+);
+
+//width
+$medium: 650px;
+$large: 1020px;
+
+//size
+$sm-fav-size: 20px;
+$lg-fav-size: 30px;
+
+//margin
+$sm-margin-serie: 0.4em;
+
+//palette de couleur
+$cH: #FFF;
+$c1: #4D55BA;
+$c2: #366CC4;
+$c3: #4C8EAD;
+$c4: #4CC2C4;
+$c5: #48BA98;
+
+$cw: #f3f3f3;
+$clg: #7D7D7D;
+$cg: #5D5D5D;
+$cdg: #3D3D3D;
+$cb: #1C1C1C;
+
+//font-size
+$sm-fs-title: 1.1em;
+$sm-fs-serie: 0.8em;
+$md-fs-title: 1.2em;
+$md-fs-serie: 0.9em;
+$lg-fs-title: 1.3em;
+$lg-fs-serie: 0.9em;
+
+//arrow size
+$sm-arrow: 50px;
+$md-arrow: 80px;

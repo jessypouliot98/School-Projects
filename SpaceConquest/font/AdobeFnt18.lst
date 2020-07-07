@@ -1,0 +1,39 @@
+%!Adobe-FontList 1.18
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Endless-Boss-Battle
+FamilyName:Endless Boss Battle
+StyleName:Regular
+FullName:Endless Boss Battle Regular
+MenuName:Endless Boss Battle
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:D:\Prog\POUJ1533944_asteroides\Font\Endless Boss Battle.ttf
+DataFormat:sfntData
+hasSVG:no
+FileLength:27768
+FileModTime:1463605442
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Endless Boss Battle Regular
+NameArray:0,Win,1,Endless Boss Battle
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:D:\Prog\POUJ1533944_asteroides\Font\FSLA_NonCommercial_License.html
+FileModTime:1485286950
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:D:\Prog\POUJ1533944_asteroides\Font\Get Commercial License.url
+FileModTime:1486059346
+%EndFont
+

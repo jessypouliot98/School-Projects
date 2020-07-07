@@ -1,0 +1,3 @@
+pdp.jpg: https://unsplash.com/search/girl?photo=n4pP64Jhd4w
+headerBG.jpg: https://unsplash.com/search/living-room?photo=oC5NGvN3FOo
+facebook/twitter logo: http://www.flaticon.com/

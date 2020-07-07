@@ -1,0 +1,106 @@
+// Définit de quoi auront l'air les modules ou les layouts dans un état particulier (caché, grossi, actif, inactif, verrouillé, glissé, sur la page principale, mobile...)
+// Les états sont des classes qu'on additionnent aux modules ou aux layouts et dont le nom débute souvent par "is-" (ex: is-locked, is-dragged, is-active).
+// Les états altèrent ne définissent pas complètement le visuel d'un module/layout, il ne font que l'altérer (écraser et/ou ajouter des propriétés)
+// Il peut être possible d'y utiliser !important si nécessaire. Soyez parcimonieux.
+
+//toggle favorite
+.is-favori {
+    &:after {
+        content: url(../images/fav-1.svg);
+        width: $sm-fav-size;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }   
+}
+//nav active
+.menu-list .active {
+    background: $c1;
+    border-bottom: 1px solid $cw;
+}
+//toggle hide profile from hero header
+@include mq(large){
+    .is-top {
+        & .pdp1 {
+            transform: translateY(200px);
+            opacity: 0%;
+            transition-duration: 1s;
+        }
+    }   
+}
+//toggle between full profile & small profile
+.is-scrolled {
+    & .pdp1 {
+        top: -150px;
+        filter: opacity(0%);
+    }
+    & .pdp2 {
+        top: 8px;
+        filter: opacity(100%); 
+    }
+    & .name1 {
+        bottom: 183px;
+        filter: opacity(0%);
+    }
+    & .name2 {
+        top: 8px;
+        filter: opacity(100%); 
+        
+        @include mq(medium){
+            width: 300px;
+            top: 15px;
+        }
+    }
+}
+//toggle Nav
+.is-masked {
+    position: absolute;
+    overflow: hidden;
+    left: -100%;
+    
+    @include mq(medium){
+        left: 0;
+    }
+}   
+
+//toggle sticky nav & profile
+.is-sticky {
+    @include mq(medium){
+        &.nav-mask {
+            position: fixed;
+            top:0;
+        }
+    }
+    &.banner {
+        position: fixed !important;
+        top: 0;
+        
+        @include mq(medium){
+            top: 40px;
+        }
+    }
+}
+//Slick dots active
+.serie-vedette{
+    .slick-dots{
+        .slick-active{
+            button {
+                background-color: $c3;
+            }
+        }
+    }
+}
+//waypoint animation
+@include keyframes(waypoint) {
+    0%   { transform: translateY(100px); }
+    40%   { transform: translateY(70px); }
+    65%   { transform: translateY(50px); }
+    100%   { transform: translateY(0px); }
+}
+@include mq(medium){
+    .waypoint-anim {
+        transform: translateY(0px);
+        //margin: 1000px 0.5% 10px;
+        animation-name: waypoint;
+    }
+}

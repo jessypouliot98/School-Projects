@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<title>Zombie Apocalypse</title>
+
+		<script type="text/javascript" src="./swfobject.js"></script>
+		<script type="text/javascript">
+		swfobject.registerObject("myId", "9.0.0", "expressInstall.swf");
+		</script><style type="text/css" media="screen">#myId {visibility:hidden}</style>
+		<style>
+            body{
+                background: black;
+            }
+            div{
+                width: 800px;
+                margin: auto;
+                //border: 1px solid white;
+            }
+        </style>
+	</head>
+	<body>
+		<div>
+			<object id="myId" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="800" height="600" style="visibility: visible;">
+				<param name="movie" value="game.swf">
+        		<!--[if !IE]>-->
+				<object type="application/x-shockwave-flash" data="./game.swf" width="800" height="600">
+				<!--<![endif]-->
+				<div>
+					<h1>Alternative content</h1>
+					<p><a href="http://www.adobe.com/go/getflashplayer"><img src="./get_flash_player.gif" alt="Get Adobe Flash player"></a></p>
+				</div>
+				<!--[if !IE]>-->
+				</object>
+				<!--<![endif]-->
+			</object>
+		</div>
+
+
+</body></html>
